@@ -4,11 +4,11 @@ password
 123
 
 login staff
-UserTest
-password
-1qwerty23
-
-login user
 UserStaff
 password
 12qwerty3
+
+login user
+UserTest
+password
+1qwerty23
