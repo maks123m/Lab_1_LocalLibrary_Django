@@ -1,10 +1,12 @@
 from django.db import models
-from django.urls import reverse  # To generate URLS by reversing URL patterns
+from django.urls import reverse
 from django.db.models import UniqueConstraint
 from django.db.models.functions import Lower
-import uuid  # Required for unique book instances
+import uuid
+from django.conf import settings
 from datetime import date
-from django.conf import settings  # Required to assign User as a borrower
+
+
 
 class Genre(models.Model):
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
@@ -101,8 +103,7 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
-    borrower = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     @property
     def is_overdue(self):
